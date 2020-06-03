@@ -1,93 +1,66 @@
 const currentDayEl = document.getElementById("currentDay");
 const dayContainer = document.getElementById("dayBlock");
 const calendarListEl = document.querySelector('#calendarlist');
+const currenthour = moment().format("HH");  // military time in order to colour code the time blocks
 
-var now = moment().format("dddd, MMMM Do");
-
-// console.log(`now: ${now}`);
-// console.log(currentDayEl);
-currentDayEl.textContent = `${now}`;
-
-// var currenthour = moment().format("hA");
-var currenthour = moment().format("HH");
-// simulating the hour
-// var currenthour = "12PM";
-
-// console.log(now);
-// console.log(`now hour: ${currenthour}`);
-
-
-function saveItem(event) {
-    var item = event.target.id;
-    console.log(`You clicked item: ${item}`);
-}
-
+// This is the array that is used to store the calendar items 9AM to 5PM
 let calendarList = localStorage.calendarList ? JSON.parse(localStorage.calendarList) :
     {
-        "9AM": "stuff",
-        "10AM": "stuff2",
-        "11AM": "stuff3",
-        "12PM": "stuff4",
-        "1PM": "stuff5",
-        "2PM": "stuff6",
-        "3PM": "stuff7",
-        "4PM": "stuff8",
-        "5PM": "stuff9"
+        "9AM": "",
+        "10AM": "",
+        "11AM": "",
+        "12PM": "",
+        "1PM": "",
+        "2PM": "",
+        "3PM": "",
+        "4PM": "",
+        "5PM": ""
     };
 
+// This function saves the calendar item (and array) to local storage
+function saveItem(time, event) {
+    event.preventDefault();
+    const itemEl = document.getElementById(time);
+    calendarList[time] = itemEl.value.trim();
+    // // save to local storage
+    localStorage.calendarList = JSON.stringify(calendarList);
+    renderList();
+}
 
+// This function is the main function to render the calendar at load and after save.
 function renderList() {
     calendarListEl.innerHTML = "";
 
+    // This is the function that sets the colour and builds the time blocks based on the hour
     function displayColor(time, index) {
         const item = calendarList[time];
         let indexClass = "";
-        let momentTime = moment(time, 'hA').format("HH");
-        // let currentTimemilitary = moment(currenthour, 'hA').format("HH");
-        if ( momentTime == currenthour ) {
-            // console.log(`[displayColor]: hour equals! ${time}`);
+        let momentTime = moment(time, 'hA').format("HH");   // military time in order to compare with the current hour
+        // check if the time value is equal to the current hour
+        // if equals, set the item to red; if less, set to grey; if greater, set to green
+        if (momentTime == currenthour) {
             indexClass = "description present";
         } else if (momentTime < currenthour) {
-            // console.log(`[displayColor]: time < currenthour`);
             indexClass = "description past";
         } else {
-            // console.log(`[displayColor]: else`);
             indexClass = "description future";
         }
-        
+        // This is building the time blocks based on the array.
         calendarListEl.innerHTML +=
             `
-            <div class="input-group row">
-                <div class="input-group-prepend">
-                <span class="input-group-text hour">${time}</span>
+            <div id='listgroup' class="input-group row">
+                <div class="input-group-prepend time-block">
+                    <span class="input-group-text hour">${time}</span>
                 </div>
-                <input id='${time}' type="text" class="${indexClass}" data-idx='${index}'>
+                <textarea id='${time}' type="text" class="${indexClass}" data-idx='${index}'>${item}</textarea>
                 <div class="input-group-append">
-            <button id="savebtn${index}" type="button" class="saveBtn fas fa-lock" onclick="saveItem(event);"> </button>
+            <button id="savebtn${index}" type="button" class="saveBtn" onclick="saveItem('${time}',event);"><i class="fas fa-lock"></i></button>
           </div>
         </div>
             `;
     }
-
+    // Need to set the colour of the time blocks
     Object.keys(calendarList).forEach(displayColor);
 }
-
-
-
-
-// for(var i = 0; i < calendarListEl.length; i++)
-// {
-//     console.log(`in for each`);
-//     if (hour == "5PM") {
-//         document.querySelector("#hour9").setAttribute("class", "description present");
-//         document.querySelector("#hour8").setAttribute("class", "description past");
-//         document.querySelector("#hour7").setAttribute("class", "description past");
-//         document.querySelector("#hour6").setAttribute("class", "description past");
-//         document.querySelector("#hour5").setAttribute("class", "description past");
-//         document.querySelector("#hour4").setAttribute("class", "description past");
-//         document.querySelector("#hour3").setAttribute("class", "description past");
-//         document.querySelector("#hour2").setAttribute("class", "description past");
-//     }
-// }
 
 renderList();

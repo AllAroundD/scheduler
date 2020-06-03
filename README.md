@@ -1,17 +1,9 @@
 # Work Day Scheduler
 
-Create a simple calendar application that allows the user to save events for each hour of the day. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
-Uses the [Moment.js](https://momentjs.com/) library to work with date and time.
+## Description 
+This is a simple calendar application that allows the user to save events for each hour of the work day (9am to 5pm). This app runs in the browser and features dynamically updated HTML and CSS, powered by JavaScript and the [Moment.js](https://momentjs.com/) library to work with date and time.
 
-## User Story
-
-```
-AS AN employee with a busy schedule
-I WANT to add important events to a daily planner
-SO THAT I can manage my time effectively
-```
-
-## Acceptance Criteria
+## Usage
 
 ```
 GIVEN I am using a daily planner to create a schedule
@@ -29,3 +21,5 @@ WHEN I refresh the page
 THEN the saved events persist
 ```
 
+## What I Learned
+This project allowed me to incorporate HTML, JavaScript, CSS and Bootstrap. I learned how to dynamically build the HTML based on the array and utilize a date library. I had a challenge with the colour coding but figured out the solution was to use military time.
