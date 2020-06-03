@@ -21,5 +21,9 @@ WHEN I refresh the page
 THEN the saved events persist
 ```
 
+The following animation demonstrates the application functionality:
+
+![day planner demo](./Assets/05-third-party-apis-homework-demo.gif)
+
 ## What I Learned
 This project allowed me to incorporate HTML, JavaScript, CSS and Bootstrap. I learned how to dynamically build the HTML based on the array and utilize a date library. I had a challenge with the colour coding but figured out the solution was to use military time.
