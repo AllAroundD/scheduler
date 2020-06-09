@@ -17,6 +17,10 @@ let calendarList = localStorage.calendarList ? JSON.parse(localStorage.calendarL
         "5PM": ""
     };
 
+// Set date at top of scheduler
+let currDate = new moment().format("dddd, MMMM Do");
+currentDayEl.innerHTML += currDate
+
 // This function saves the calendar item (and array) to local storage
 function saveItem(time, event) {
     event.preventDefault();
