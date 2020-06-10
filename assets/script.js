@@ -58,9 +58,9 @@ function renderList() {
                 </div>
                 <textarea id='${time}' type="text" class="${indexClass}" data-idx='${index}'>${item}</textarea>
                 <div class="input-group-append">
-            <button id="savebtn${index}" type="button" class="saveBtn" onclick="saveItem('${time}',event);"><i class="fas fa-lock"></i></button>
-          </div>
-        </div>
+                    <button id="savebtn${index}" type="button" class="saveBtn" onclick="saveItem('${time}',event);"><i class="fas fa-lock"></i></button>
+                </div>
+            </div>
             `;
     }
     // Need to set the colour of the time blocks
